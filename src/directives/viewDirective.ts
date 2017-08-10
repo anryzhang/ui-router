@@ -362,6 +362,9 @@ function $ViewDirectiveFill($compile: angular.ICompileService,
         }
 
         let cfg: Ng1ViewConfig = data.$cfg || <any> { viewDecl: {}, getTemplate: noop };
+        if(!cfg.getTemplate){
+          return ;
+        }
         let resolveCtx: ResolveContext = cfg.path && new ResolveContext(cfg.path);
         $element.html(cfg.getTemplate($element, resolveCtx) || initial);
         trace.traceUIViewFill(data.$uiView, $element.html());
